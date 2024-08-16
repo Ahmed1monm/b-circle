@@ -1,0 +1,19 @@
+import {date, index, pgTable, uuid} from 'drizzle-orm/pg-core';
+
+import {circles} from './circle';
+import {users} from './user';
+
+export const usersToCircles = pgTable('users_to_circles', {
+    user_id: uuid('user_id').notNull().references(() => users.id),
+    circle_id: uuid('circle_id').notNull().references(() => circles.id),
+    created_at: date('created_at').notNull().default('now()'),
+    updated_at: date('updated_at').notNull().default('now()'),
+}, (table) => {
+    return {
+        userIndex: index('user_index').on(table.user_id),
+        circleIndex: index('circle_index').on(table.circle_id),
+    };
+});
+
+export type UsersToCirclesInsert = typeof usersToCircles.$inferInsert;
+export type UsersToCirclesSelect = typeof usersToCircles.$inferSelect;

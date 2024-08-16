@@ -1,0 +1,15 @@
+node_modules/
+tmp/
+dist/
+
+# Rest client vscode plugin
+*.rest
+.DS_Store
+
+.env
+.env.development
+
+.idea/
+.vscode/
+
+*.log
