@@ -6,6 +6,7 @@ import config from "./config";
 import {logger} from "./clients";
 import {errorHandler} from "./middlewares";
 import router from "./routes";
+import {authenticator} from "./middlewares/authenticator";
 
 const app = express();
 
