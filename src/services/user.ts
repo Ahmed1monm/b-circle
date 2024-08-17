@@ -1,8 +1,8 @@
 import {users} from "../db/models";
 import {db} from "../clients";
-import {createUserType} from "../dtos";
+import {createUserDTO} from "../dtos";
 
-export async function createUserService(user: createUserType) {
+export async function createUserService(user: createUserDTO) {
     try {
         return await db.insert(users).values(user).returning();
     } catch (err) {
