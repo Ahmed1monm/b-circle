@@ -10,8 +10,8 @@ export const tagsToCircles = pgTable('tags_to_circles', {
     updated_at: date('updated_at').notNull().default('now()'),
 }, (table) => {
     return {
-        tagIndex: index('tag_index').on(table.tag_id),
-        circleIndex: index('circle_index').on(table.circle_id),
+        tagIndex: index('tags_to_circles_tag_index').on(table.tag_id),
+        circleIndex: index('tags_to_circles_circle_index').on(table.circle_id),
     };
 });
 

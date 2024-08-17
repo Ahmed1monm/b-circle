@@ -1,4 +1,3 @@
-import 'dotconfig/config';
 import type {Config} from 'drizzle-kit';
 import config from './src/config';
 

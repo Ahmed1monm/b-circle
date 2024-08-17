@@ -10,8 +10,8 @@ export const usersToCircles = pgTable('users_to_circles', {
     updated_at: date('updated_at').notNull().default('now()'),
 }, (table) => {
     return {
-        userIndex: index('user_index').on(table.user_id),
-        circleIndex: index('circle_index').on(table.circle_id),
+        userIndex: index('user_to_circle_user_idx').on(table.user_id),
+        circleIndex: index('user_to_circle_circle_idx').on(table.circle_id),
     };
 });
 

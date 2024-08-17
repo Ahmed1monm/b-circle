@@ -4,6 +4,7 @@ import pg from 'pg';
 
 import config from "../config";
 import {logger} from './logger';
+import * as process from "node:process";
 
 const opts = {
     user: config.DATABASE_USER,
@@ -24,7 +25,7 @@ export const getDb = async (opts: pg.ClientConfig) => {
     logger.info(`connected to: ${opts.database}`);
 
     await migrate(db, {
-        migrationsFolder: config.MIGRATIONS_DIR,
+        migrationsFolder: process.cwd() + '/src/db/migrations',
     });
 
     logger.info('database migrated successfully');
@@ -35,6 +36,7 @@ export const getDb = async (opts: pg.ClientConfig) => {
 getDb(opts).then((db) => {
     logger.info('db connected and migration done successfully');
 }).catch((err) => {
+    logger.debug(opts);
     logger.error('db connection failed', err);
     process.exit(1);
 });
