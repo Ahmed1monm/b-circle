@@ -26,6 +26,7 @@ const config = {
     DATABASE_NAME: process.env.DATABASE_NAME,
     DATABASE_PORT: process.env.DATABASE_PORT,
     MIGRATIONS_DIR: path.join(root_dir, "/db/migrations"),
+    JWT_SECRET: process.env.JWT_SECRET,
 };
 
 export default config;
