@@ -1,4 +1,7 @@
 import {date, index, pgTable, uuid, varchar} from 'drizzle-orm/pg-core';
+import {relations} from "drizzle-orm";
+
+import {usersToCircles} from "./usersToCircles";
 
 export const users = pgTable('users', {
     id: uuid('id').primaryKey(),
@@ -9,6 +12,10 @@ export const users = pgTable('users', {
 }, (table) => {
     return {emailIndex: index('email_index').on(table.email)};
 });
+
+export const userRelations = relations(users, ({many}) => ({
+    usersToCircles: many(usersToCircles)
+}));
 
 export type UserInsert = typeof users.$inferInsert;
 export type UserSelect = typeof users.$inferSelect;

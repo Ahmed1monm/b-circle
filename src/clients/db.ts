@@ -4,6 +4,7 @@ import pg from 'pg';
 
 import config from "../config";
 import {logger} from './logger';
+// import * as schemas from "db/models";
 import * as process from "node:process";
 
 const opts = {

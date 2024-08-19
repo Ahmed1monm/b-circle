@@ -1,9 +1,12 @@
 import {Router} from "express";
 
-import {createCircle, addUserToCircle} from "../controllers";
-import {createCircleValidator, addUserToCircleValidator} from "../validators";
+import {addUserToCircle, createCircle, getCircleUsers} from "../controllers";
+import {addUserToCircleValidator, createCircleValidator, getCircleUsersValidator} from "../validators";
 
 export const circleRouter = Router();
 
-circleRouter.route("/").get().post(createCircleValidator, createCircle);
-circleRouter.route("/:id").patch(addUserToCircleValidator, addUserToCircle);
+circleRouter.route("/")
+    .post(createCircleValidator, createCircle);
+circleRouter.route("/:id")
+    .patch(addUserToCircleValidator, addUserToCircle)
+    .get(getCircleUsersValidator, getCircleUsers);
