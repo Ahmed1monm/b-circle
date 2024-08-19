@@ -1,7 +1,7 @@
 import {addUserToCircleDTO, createCircleDTO} from "../dtos/circle";
 import {circles, users, usersToCircles} from "../db/models";
 import {db} from "../clients";
-import {eq} from "drizzle-orm";
+import {and, eq} from "drizzle-orm";
 
 export async function createCircleService(circle: createCircleDTO) {
     try {
@@ -50,5 +50,16 @@ export async function getCircleUsersService(circleId: string) {
         };
     } catch (err) {
         throw new Error(`Error happened while getting circle users ${err.message}`);
+    }
+}
+
+export async function removeUserFromCircleService({circle_id, user_id}) {
+    try {
+        return await db.delete(usersToCircles).where(and(
+            eq(usersToCircles.circle_id, circle_id),
+            eq(usersToCircles.user_id, user_id),
+        )).returning();
+    } catch (err) {
+        throw new Error(`Error happened while removing user from circle ${err.message}`);
     }
 }

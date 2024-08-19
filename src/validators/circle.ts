@@ -16,3 +16,9 @@ export const getCircleUsersValidator = [
     param("id").exists().isUUID().withMessage("circleId is required"),
     validationMiddleware
 ];
+
+export const removeUserFromCircleValidator = [
+    param("id").exists().isUUID().withMessage("circleId is required"),
+    param("userId").exists().isUUID().withMessage("userId is required"),
+    validationMiddleware
+];
