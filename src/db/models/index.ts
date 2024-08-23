@@ -6,3 +6,4 @@ export * from "./usersToCircles";
 export * from "./circle";
 export * from "./tagsToCircles";
 export * from "./comment";
+export * from "./blogToCircle";

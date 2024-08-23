@@ -15,5 +15,5 @@ export const blogsToCircles = pgTable('articles_to_tags', {
     };
 });
 
-export type BlogsToTagsInsert = typeof blogsToCircles.$inferInsert;
-export type BlogsToTagsSelect = typeof blogsToCircles.$inferSelect;
+export type BlogsToCirclesInsert = typeof blogsToCircles.$inferInsert;
+export type BlogsToCirclesSelect = typeof blogsToCircles.$inferSelect;
