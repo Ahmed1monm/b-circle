@@ -15,6 +15,20 @@
       "when": 1724441004967,
       "tag": "0001_reflective_whizzer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1724442547897,
+      "tag": "0002_clean_moonstone",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1724445632970,
+      "tag": "0003_lush_night_thrasher",
+      "breakpoints": true
     }
   ]
 }

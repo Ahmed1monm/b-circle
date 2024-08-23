@@ -7,3 +7,4 @@ export * from "./circle";
 export * from "./tagsToCircles";
 export * from "./comment";
 export * from "./blogToCircle";
+export * from "./profile";

@@ -16,7 +16,7 @@ const opts = {
 }
 
 const client = new pg.Client(opts);
-export const db = drizzle(client);
+export const db = drizzle(client, {logger: true});
 
 
 export const getDb = async (opts: pg.ClientConfig) => {
