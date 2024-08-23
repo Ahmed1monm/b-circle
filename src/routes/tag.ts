@@ -1,8 +1,8 @@
 import {Router} from "express";
 
-import {createTagController} from "../controllers";
+import {createTagController, getTagsController} from "../controllers";
 import {createTagValidator} from "../validators";
 
 export const tagRouter = Router();
 
-tagRouter.route("/").get().post(createTagValidator, createTagController);
+tagRouter.route("/").get(getTagsController).post(createTagValidator, createTagController);

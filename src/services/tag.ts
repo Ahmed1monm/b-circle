@@ -9,3 +9,12 @@ export async function createTagService(name: string, id: string) {
         throw new Error(`Error happened while creating tag ${err.message}`);
     }
 }
+
+
+export async function getTagsService() {
+    try {
+        return await db.select().from(tags);
+    } catch (err) {
+        throw new Error(`Error happened while getting tags ${err.message}`);
+    }
+}

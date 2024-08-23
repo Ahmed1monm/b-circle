@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import {logger} from "../clients";
 import {uuidGenerator} from "../utils";
-import {createTagService} from "../services";
+import {createTagService, getTagsService} from "../services";
 
 export async function createTagController(req: Request, res: Response) {
     try {
@@ -16,5 +16,15 @@ export async function createTagController(req: Request, res: Response) {
     } catch (error) {
         logger.error(`Failed to create tag: ${JSON.stringify( error.message)}`);
         return res.status(400).send(`Error happened while creating tag ${error.message}`);
+    }
+}
+
+export async function getTagsController(req: Request, res: Response) {
+    try {
+        const tags = await getTagsService();
+        return res.status(200).json({tags});
+    } catch (error) {
+        logger.error(`Failed to get tags: ${JSON.stringify( error.message)}`);
+        return res.status(400).send(`Error happened while getting tags ${error.message}`);
     }
 }

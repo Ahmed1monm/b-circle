@@ -4,7 +4,6 @@ import {logger} from "../clients";
 import {uuidGenerator} from "../utils";
 import {createBlogDTO} from "../dtos";
 import {createBlogService} from "../services";
-import {and} from "drizzle-orm";
 
 // TODO: set the circles & tags while creating the blog
 export async function createBlog(req: Request, res: Response) {
