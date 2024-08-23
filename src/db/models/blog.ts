@@ -1,4 +1,7 @@
 import {date, index, pgTable, uuid, varchar, text} from 'drizzle-orm/pg-core';
+import {relations} from "drizzle-orm";
+
+import {blogsToCircles} from "./blogToCircle";
 
 export const blogs = pgTable('articles', {
     id: uuid('id').primaryKey(),
@@ -9,6 +12,10 @@ export const blogs = pgTable('articles', {
 }, (table) => {
     return {};
 });
+
+const blogRelations = relations(blogs, ({many}) => ({
+    blogsToCircles: many(blogsToCircles)
+}));
 
 export type ArticleInsert = typeof blogs.$inferInsert;
 export type ArticleSelect = typeof blogs.$inferSelect;

@@ -1,7 +1,8 @@
-import {addUserToCircleDTO, createCircleDTO} from "../dtos/circle";
+import {and, eq} from "drizzle-orm";
+
+import {addUserToCircleDTO, createCircleDTO} from "../dtos";
 import {circles, users, usersToCircles} from "../db/models";
 import {db} from "../clients";
-import {and, eq} from "drizzle-orm";
 
 export async function createCircleService(circle: createCircleDTO) {
     try {
