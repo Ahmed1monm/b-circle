@@ -1,0 +1,40 @@
+version: '3'
+services:
+  # Node.js application
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    ports:
+      - "8000:8000"  
+    networks:
+      - bcircleNetwork
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: bcircle
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: password
+
+  # PostgreSQL
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"  
+    environment:
+      POSTGRES_DB: bcircle
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    networks:
+      - bcircleNetwork
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+
+networks:
+  bcircleNetwork:
+
+volumes:
+  postgres-data:
