@@ -1,8 +1,9 @@
 import {Router} from "express";
 
 import {createBlogValidator} from "../validators/";
-import {createBlog} from "../controllers/";
+import {createBlog, getBlog, updateBlog} from "../controllers/";
 
 export const blogRouter = Router();
 
-blogRouter.route("/").get().post(createBlogValidator, createBlog);
+blogRouter.route("/").post(createBlogValidator, createBlog);
+blogRouter.route("/:id").patch(updateBlog).get(getBlog);

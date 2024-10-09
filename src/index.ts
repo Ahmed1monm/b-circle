@@ -1,18 +1,20 @@
 import express from 'express';
 import morgan from "morgan";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 import config from "./config";
 import {logger} from "./clients";
 import {errorHandler} from "./middlewares";
 import router from "./routes";
-import {authenticator} from "./middlewares/authenticator";
 
 const app = express();
 
 app.use(morgan("common"));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.use(errorHandler);
 
