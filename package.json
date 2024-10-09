@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "NODE_ENV=development nodemon --exec NODE_OPTIONS='--inspect' ts-node src/index.ts",
+    "start:dev": "cross-env NODE_ENV=development nodemon --exec NODE_OPTIONS='--inspect' ts-node src/index.ts",
     "start:prod": "NODE_ENV=production node dist/index.js",
     "build": "tsc",
     "build:watch": "tsc -w",
@@ -22,6 +22,7 @@
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.4",
     "ts-node": "^10.9.2"
   },
