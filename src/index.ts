@@ -2,6 +2,9 @@ import express from 'express';
 import morgan from "morgan";
 import bodyParser from "body-parser";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yaml";
+import fs from "fs";
 
 import config from "./config";
 import {logger} from "./clients";
@@ -18,7 +21,12 @@ app.use(cors());
 
 app.use(errorHandler);
 
+
+const file  = fs.readFileSync('./swagger.yaml', 'utf8');
+const swaggerDocument = YAML.parse(file);
+
 app.use("/api", router);
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(config.port, () => {
     logger.info(`Server is running on port ${config.port}`);

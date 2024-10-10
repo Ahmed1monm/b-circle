@@ -1,0 +1,213 @@
+openapi: 3.0.0
+info:
+  title: b-circle API
+  description: API documentation for b-circle services
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /users:
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+              example:
+                email: "monem@gmail.com"
+                name: "Test user"
+      responses:
+        '200':
+          description: Successfully created user
+        '400':
+          description: Bad request
+
+  /circle:
+    post:
+      summary: Create a new circle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              example:
+                name: "circle 1"
+      responses:
+        '200':
+          description: Successfully created circle
+        '400':
+          description: Bad request
+
+  /circle/{id}/users:
+    post:
+      summary: Add user to circle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "990dd7db-cfc1-4778-b5bd-f765513d9f59"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+              example:
+                userId: "cf2a492b-db48-4bac-bde0-a8af5f41e713"
+      responses:
+        '200':
+          description: User successfully added to circle
+        '400':
+          description: Bad request
+
+    delete:
+      summary: Remove user from circle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "990dd7db-cfc1-4778-b5bd-f765513d9f59"
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "cf2a492b-db48-4bac-bde0-a8af5f41e713"
+      responses:
+        '200':
+          description: User successfully removed from circle
+        '400':
+          description: Bad request
+
+  /circle/{id}:
+    get:
+      summary: Get users in a circle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "990dd7db-cfc1-4778-b5bd-f765513d9f59"
+      responses:
+        '200':
+          description: List of users in the circle
+        '404':
+          description: Circle not found
+
+  /tag:
+    post:
+      summary: Create a new tag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              example:
+                name: "Ahmesdsdd Monem"
+      responses:
+        '200':
+          description: Successfully created tag
+        '400':
+          description: Bad request
+
+    get:
+      summary: Get all tags
+      responses:
+        '200':
+          description: List of all tags
+
+  /blog:
+    post:
+      summary: Create a blog post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+              example:
+                title: "test"
+                content: "## Markdown example content"
+      responses:
+        '200':
+          description: Successfully created blog post
+        '400':
+          description: Bad request
+
+  /blog/{id}:
+    get:
+      summary: Get a blog post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "1c208e64-0bd4-446b-8b71-50bd6b5a82f0"
+      responses:
+        '200':
+          description: Blog post details
+        '404':
+          description: Blog post not found
+
+  /profile:
+    get:
+      summary: Get user profile
+      responses:
+        '200':
+          description: User profile details
+    
+    post:
+      summary: Update user profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                bio:
+                  type: string
+                image:
+                  type: string
+              example:
+                name: "Test user"
+                email: "monem@example.com"
+                bio: "I am a software engineer"
+                image: "https://example.com/image.jpg"
+      responses:
+        '200':
+          description: User profile updated
+        '400':
+          description: Bad request
+        
