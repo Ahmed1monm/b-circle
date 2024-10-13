@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development nodemon --exec NODE_OPTIONS='--inspect' ts-node src/index.ts",
+    "start:dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/index.ts",
     "start:prod": "NODE_ENV=production node dist/index.js",
     "build": "tsc",
     "build:watch": "tsc -w",
