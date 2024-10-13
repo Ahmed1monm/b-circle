@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 
 import {logger} from "../clients";
 import {uuidGenerator} from "../utils";
-import {createUserService} from "../services/";
+import {createUserService, getAllUsersService} from "../services/";
 import {generateToken} from "../services/";
 
 
@@ -23,5 +23,15 @@ export async function createUser(req: Request, res: Response) {
     } catch (err) {
         logger.error("Failed to create user: ", err.message);
         return res.status(400).send(`Error happened while creating user ${err.message}`);
+    }
+}
+
+export async function getAllUsers(req: Request, res: Response){
+    try {
+        const users = await getAllUsersService();
+        return res.status(200).send({users});
+    } catch (err) {
+        logger.error(`Error in retreving all users ${err.message}`);
+        return res.status(400).send(`Error happened while get all users ${err.message}`);
     }
 }

@@ -9,3 +9,11 @@ export async function createUserService(user: createUserDTO) {
         throw new Error(`Failed to create user: ${err.message}`);
     }
 }
+
+export async function getAllUsersService() {
+    try {
+        return await db.select().from(users);
+    } catch (err) {
+        throw new Error(`Failed to get all users: ${err.message}`)
+    }
+}

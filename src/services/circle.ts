@@ -1,4 +1,4 @@
-import {and, eq} from "drizzle-orm";
+import {and, desc, eq} from "drizzle-orm";
 
 import {addUserToCircleDTO, createCircleDTO} from "../dtos";
 import {circles, users, usersToCircles} from "../db/models";
@@ -62,5 +62,13 @@ export async function removeUserFromCircleService({circle_id, user_id}) {
         )).returning();
     } catch (err) {
         throw new Error(`Error happened while removing user from circle ${err.message}`);
+    }
+}
+
+export async function getAllCirclesService() {
+    try {
+        return (await db.select().from(circles).orderBy(desc(circles.created_at)))
+    } catch (e) {
+        throw new Error('Error in retrieving all circles');
     }
 }

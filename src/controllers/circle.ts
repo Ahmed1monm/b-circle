@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {uuidGenerator} from "../utils";
-import {createCircleService, addUserToCircleService, getCircleUsersService, removeUserFromCircleService} from "../services";
+import {createCircleService, addUserToCircleService, getCircleUsersService, removeUserFromCircleService, getAllCirclesService} from "../services";
 
 export async function createCircle(req: Request, res: Response) {
     const {name} = req.body;
@@ -10,6 +10,15 @@ export async function createCircle(req: Request, res: Response) {
         return  res.status(201).json({circle: circles[0]});
     } catch (err) {
         return  res.status(400).json({err: `Error happened while creating circle ${err.message}`});
+    }
+}
+
+export async function getAllCircles (req: Request, res: Response) {
+    try {
+        const circles = await getAllCirclesService();
+        return res.status(200).json({circles});
+    } catch (err) {
+        return res.status(400).json({err: `Error happened while getting all circles ${err.message}`});
     }
 }
 
