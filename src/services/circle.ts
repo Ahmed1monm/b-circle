@@ -40,9 +40,11 @@ export async function getCircleUsersService(circleId: string) {
             .execute();
             console.log(JSON.stringify( result));
 
+        const circle = await db.select({circleName: circles.name}).from(circles).where(eq(circles.id, circleId)).execute();
+
         return {
             circleId,
-            circleName: result[0].circleName,
+            circleName: result[0]?.circleName ? result[0].circleName : circle[0].circleName,
             users: result.map(user => ({
                 id: user.userId,
                 name: user.userName,
