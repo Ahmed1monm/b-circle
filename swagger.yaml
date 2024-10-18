@@ -73,36 +73,36 @@ paths:
         '400':
           description: Bad request
 
-
   /circle/{id}/users:
-    post:
-      summary: Add user to circle
-      tags:
-        - circle
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: "990dd7db-cfc1-4778-b5bd-f765513d9f59"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                userId:
-                  type: string
-              example:
-                userId: "cf2a492b-db48-4bac-bde0-a8af5f41e713"
-      responses:
-        '200':
-          description: User successfully added to circle
-        '400':
-          description: Bad request
-
+        post:
+          summary: Add user to circle
+          tags:
+            - circle
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: string
+              example: "990dd7db-cfc1-4778-b5bd-f765513d9f59"
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    userId:
+                      type: string
+                  example:
+                    userId: "cf2a492b-db48-4bac-bde0-a8af5f41e713"
+          responses:
+            '200':
+              description: User successfully added to circle
+            '400':
+              description: Bad request
+  
+  /circle/{id}/users/{userId}:
     delete:
       summary: Remove user from circle
       tags:
@@ -190,14 +190,36 @@ paths:
                   type: string
                 content:
                   type: string
+                circles_ids:
+                  type: array
+                  items:
+                    type: string
+  
+                tags_ids:
+                  type: array
+                  items:
+                    type: string
+
               example:
                 title: "test"
                 content: "## Markdown example content"
+                circles_ids: ["990dd7db-cfc1-4778-b5bd-f765513d9f59"]
+                tags_ids: ["990dd7db-cfc1-4778-b5bd-f765513d9f59"]
       responses:
         '200':
           description: Successfully created blog post
         '400':
           description: Bad request
+
+    get:
+      tags:
+        - blog
+      summary: Get all blog posts
+      responses:
+        '200':
+          description: List of all blog posts
+        '400':
+          description: Bad request'
 
   /blog/{id}:
     get:

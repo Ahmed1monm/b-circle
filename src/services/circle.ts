@@ -38,7 +38,7 @@ export async function getCircleUsersService(circleId: string) {
             .where(eq(circles.id, circleId))
 
             .execute();
-
+            console.log(JSON.stringify( result));
 
         return {
             circleId,

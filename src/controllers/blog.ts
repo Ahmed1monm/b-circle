@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import {logger} from "../clients";
 import {uuidGenerator} from "../utils";
 import {createBlogDTO, updateBlogDTO} from "../dtos";
-import {createBlogService, getBlogService, updateBlogService} from "../services";
+import {createBlogService, getAllBlogsService, getBlogService, updateBlogService} from "../services";
 
 // TODO: set the circles & tags while creating the blog
 export async function createBlog(req: Request, res: Response) {
@@ -46,5 +46,15 @@ export async function getBlog(req: Request, res: Response) {
     } catch (error) {
         logger.error(`Failed to get blog: ${JSON.stringify( error.message)}`);
         return res.status(400).send(`Error happened while getting blog ${error.message}`);
+    }
+}
+
+export async function getAllBlogs(req: Request, res: Response) {
+    try {
+        const blogs = await getAllBlogsService();
+        return res.status(200).send({blogs});
+    } catch (error) {
+        logger.error(`Failed to get all blogs: ${JSON.stringify( error.message)}`);
+        return res.status(400).send(`Error happened while getting all blogs ${error.message}`);
     }
 }

@@ -100,3 +100,27 @@ export async function getBlogService(id: string) {
         throw new Error(`Failed to get blog ${error.message}`);
     }
 }
+
+
+export async function getAllBlogsService() {
+    try {
+        return await db.select(
+            {
+                blogId: blogs.id,
+                title: blogs.title,
+                content: blogs.content,
+                tags: tags.name,
+                circles: circles.name,
+            }
+        )
+            .from(blogs)
+            .leftJoin(blogsToTags, eq(blogs.id, blogsToTags.blog_id))
+            .leftJoin(tags, eq(blogsToTags.tag_id, tags.id))
+            .leftJoin(blogsToCircles, eq(blogs.id, blogsToCircles.blog_id))
+            .leftJoin(circles, eq(blogsToCircles.circle_id, circles.id))
+            .groupBy(blogs.id, tags.name, circles.name);
+    } catch (error) {
+        logger.error("Failed to get all blogs: ", error.message);
+        throw new Error(`Failed to get all blogs ${error.message}`);
+    }
+}
